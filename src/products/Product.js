@@ -1,12 +1,14 @@
 import Image from "../nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+
 
 function Product(props) {
   const price = 10000;
   let percentOff;
   let offPrice = `${price}Ks`;
-
+  const dispatch = useDispatch();
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
       <div
@@ -42,7 +44,7 @@ function Product(props) {
           </h5>
           <p className="card-text text-center text-muted mb-0">{offPrice}</p>
           <div className="d-grid d-block">
-            <button className="btn btn-outline-dark mt-3">
+            <button className="btn btn-outline-dark mt-3" onClick={() => dispatch({ type: "ADD_ITEM", payload: { id: 1, name: "Nillkin iPhone X cover", price: price, quantity: 1} })}>
               <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Add to cart
             </button>
           </div>

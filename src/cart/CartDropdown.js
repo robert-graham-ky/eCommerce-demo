@@ -5,6 +5,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 function CartDropdown() {
   const items = useSelector((state) => state.cart.items);
   const subtotal = useSelector((state) => state.cart.subtotal);
+  const length = useSelector((state) => state.cart.length);
   const dispatch = useDispatch();
 
   function handleDecreaseQuantity(itemId) {
@@ -22,14 +23,15 @@ function CartDropdown() {
   return (
     <div className="dropdown">
       <button
-        className="btn btn-outline-dark me-3 d-none d-lg-inline"
+        className="btn btn-outline-dark me-3 d-none d-lg-inline dropdown-toggle"
         type="button"
         id="cartDropdown"
         data-bs-toggle="dropdown"
-        aria-expanded="false"
+        data-bs-persistence="true"
+        data-bs-auto-end="false"
       >
         <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
-        <span className="ms-3 badge rounded-pill bg-dark">{items.length}</span>
+        <span className="ms-3 badge rounded-pill bg-dark">{length}</span>
       </button>
       <div className="dropdown-menu" aria-labelledby="cartDropdown">
         {items.map((item) => (
