@@ -96,7 +96,7 @@ function FilterMenuLeft() {
   );
 }
 
-function ProductList() {
+function ProductList({ products }) {
   const [viewType, setViewType] = useState({ grid: true });
 
   function changeViewType() {
@@ -222,14 +222,22 @@ function ProductList() {
                 (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
               }
             >
-              {Array.from({ length: 10 }, (_, i) => {
+              {products.map((product, i) => {
                 if (viewType.grid) {
                   return (
-                    <Product key={i} percentOff={i % 2 === 0 ? 15 : null} />
+                    <Product
+                      key={i}
+                      product={product}
+                      percentOff={i % 2 === 0 ? 15 : null}
+                    />
                   );
                 }
                 return (
-                  <ProductH key={i} percentOff={i % 4 === 0 ? 15 : null} />
+                  <ProductH
+                    key={i}
+                    product={product}
+                    percentOff={i % 4 === 0 ? 15 : null}
+                  />
                 );
               })}
             </div>

@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 
 
 function Product(props) {
-  const price = 10000;
+  const { product } = props;
+  const price = product.price;
   let percentOff;
-  let offPrice = `${price}Ks`;
+  let offPrice = `$${product.price}`;
   const dispatch = useDispatch();
   if (props.percentOff && props.percentOff > 0) {
     percentOff = (
@@ -21,7 +22,7 @@ function Product(props) {
 
     offPrice = (
       <>
-        <del>{price}Ks</del> {price - (props.percentOff * price) / 100}Ks
+        <del>{"$"}{product.price}</del> {product.price - (props.percentOff * product.price) / 100}
       </>
     );
   }
@@ -34,17 +35,17 @@ function Product(props) {
           <img
             className="card-img-top bg-dark cover"
             height="200"
-            alt=""
+            alt={product.name}
             src={Image}
           />
         </Link>
         <div className="card-body">
           <h5 className="card-title text-center text-dark text-truncate">
-            Nillkin iPhone X cover
+          {product.name}
           </h5>
           <p className="card-text text-center text-muted mb-0">{offPrice}</p>
           <div className="d-grid d-block">
-            <button className="btn btn-outline-dark mt-3" onClick={() => dispatch({ type: "ADD_ITEM", payload: { id: 1, name: "Nillkin iPhone X cover", price: price, quantity: 1} })}>
+            <button className="btn btn-outline-dark mt-3" onClick={() => dispatch({ type: "ADD_ITEM", payload: { id: 1, name: product.name, price: product.price, quantity: 1, image: {Image}} })}>
               <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Add to cart
             </button>
           </div>

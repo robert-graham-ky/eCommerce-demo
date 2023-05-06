@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Template from "./template/Template";
 import ProductDetail from "./products/detail/ProductDetail";
 import { Switch, Route } from "react-router-dom";
@@ -10,18 +11,33 @@ import { cartReducer } from "./cart/CartStore";
 import store from "./cart/CartStore";
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/products');
+        const data = await response.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
   return (
     <Provider store={store}>
       <Template>
         <Switch>
           <Route path="/products" exact>
-            <ProductList />
+            <ProductList products={products}/>
           </Route>
           <Route path="/products/:slug">
             <ProductDetail />
           </Route>
           <Route path="/" exact>
-            <Landing />
+            <Landing products={products}/>
           </Route>
         </Switch>
       </Template>

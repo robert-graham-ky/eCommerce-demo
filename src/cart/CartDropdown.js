@@ -21,7 +21,7 @@ function CartDropdown() {
   }
 
   return (
-    <div className="dropdown">
+    <div className="dropdown" data-bs-auto-close="outside">
       <button
         className="btn btn-outline-dark me-3 d-none d-lg-inline dropdown-toggle"
         type="button"
@@ -29,11 +29,12 @@ function CartDropdown() {
         data-bs-toggle="dropdown"
         data-bs-persistence="true"
         data-bs-auto-end="false"
+        
       >
         <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
         <span className="ms-3 badge rounded-pill bg-dark">{length}</span>
       </button>
-      <div className="dropdown-menu" aria-labelledby="cartDropdown">
+      <div className="dropdown-menu" aria-labelledby="cartDropdown" data-bs-auto-close="outside" onClick={(event) => event.stopPropagation()}>
         {items.map((item) => (
           <div key={item.id} className="dropdown-item">
             <img src={item.image} alt={item.name} />
