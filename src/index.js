@@ -1,5 +1,6 @@
 import "./bootstrap-custom.css";
 import "./index.css";
+import "./styles.scss";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import React from "react";

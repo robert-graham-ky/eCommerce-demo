@@ -1,4 +1,3 @@
-import Image from "../nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
@@ -7,6 +6,10 @@ import { useDispatch } from "react-redux";
 function Product(props) {
   const { product } = props;
   const price = product.price;
+  //const baseImagePath = "../../../image-store-tester/uploads/";
+  const baseImagePath = "http://localhost:8000/uploads/";
+  const image = product.productImage.replace(/\\/g, '/').split('/').pop();
+  const imageSource = `${baseImagePath}${image}`;
   let percentOff;
   let offPrice = `$${product.price}`;
   const dispatch = useDispatch();
@@ -36,7 +39,7 @@ function Product(props) {
             className="card-img-top bg-dark cover"
             height="200"
             alt={product.name}
-            src={Image}
+            src={imageSource}
           />
         </Link>
         <div className="card-body">

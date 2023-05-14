@@ -8,6 +8,7 @@ import Landing from "./landing/Landing";
 import ProductList from "./products/ProductList";
 import { configureStore } from "redux";
 import { cartReducer } from "./cart/CartStore";
+import SignUp from "./signup/SignUp";
 import store from "./cart/CartStore";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/products/:slug">
             <ProductDetail />
+          </Route>
+          <Route path="/signup" exact>
+            <SignUp />
           </Route>
           <Route path="/" exact>
             <Landing products={products}/>

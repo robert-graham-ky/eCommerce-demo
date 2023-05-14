@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function ProductH(props) {
   const { product } = props;
   const price = product.price;
+  //const baseImagePath = "../../../image-store-tester/uploads/";
+  const baseImagePath = "http://localhost:8000/uploads/";
+  const image = product.productImage.replace(/\\/g, '/').split('/').pop();
+  const imageSource = `${baseImagePath}${image}`;
   let percentOff;
   let offPrice = `$${product.price}`;
 
@@ -34,7 +38,7 @@ function ProductH(props) {
               <img
                 className="rounded-start bg-dark cover w-100 h-100"
                 alt={product.name}
-                src={Image}
+                src={imageSource}
               />
             </Link>
           </div>
